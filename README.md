@@ -24,7 +24,7 @@ PROJECT_NAME=my_project_name
 
 # ssh tunnel
 TUNNEL_LOCAL_HOST=whoami
-TUNNEL_LOCAL_PORT=80
+TUNNEL_LOCAL_PORT=8000
 TUNNEL_REMOTE_HOST=*
 TUNNEL_REMOTE_PORT=8084
 TUNNEL_SSH_KEY_FILE=/home/my_local_username/.ssh/thetunnel
