@@ -1,0 +1,26 @@
+version: "3.6"
+
+networks:
+  "proxy_default":
+    external: true
+
+services:
+
+  node:
+    restart: always
+    build: ./tunnelproxy/.
+    image: ${PROJECT_NAME}_tunnelproxy
+    working_dir: /home/node/app/apps/tunnelproxy
+    command: "npm start"
+    container_name: ${PROJECT_NAME}_proxy
+    volumes:
+      - .:/home/node/app
+      - /home/node/app/node_modules
+    networks:
+      - proxy_default
+    environment:
+      - VIRTUAL_HOST=${VIRTUAL_HOST}
+      - VIRTUAL_PORT=${APP_PORT}
+      - LETSENCRYPT_HOST=${VIRTUAL_HOST}
+      - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
+      - TUNNEL_HOST=${TUNNEL_HOST}

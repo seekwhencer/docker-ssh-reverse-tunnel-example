@@ -1,0 +1,26 @@
+version: "3.6"
+
+networks:
+  app:
+    external: false
+    name: ${PROJECT_NAME}_default
+
+services:
+  tunnel:
+    restart: always
+    build: ./tunnel/.
+    container_name: ${PROJECT_NAME}_tunnel
+    command: /tunnel/tunnel.sh
+    networks:
+      - app
+    volumes:
+      - ./tunnel/tunnel.sh:/tunnel/tunnel.sh
+      - ${TUNNEL_SSH_KEY_FILE}:/root/.ssh/tunnel:ro
+    environment:
+      - REMOTE_HOST=${TUNNEL_REMOTE_HOST}
+      - REMOTE_PORT=${TUNNEL_REMOTE_PORT}
+      - LOCAL_HOST=${TUNNEL_LOCAL_HOST}
+      - LOCAL_PORT=${TUNNEL_LOCAL_PORT}
+      - SSH_KEY_FILE=${TUNNEL_SSH_KEY_FILE}
+      - SSH_KEY_USER=${TUNNEL_SSH_KEY_USER}
+      - SSH_HOST=${TUNNEL_SSH_HOST}
