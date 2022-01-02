@@ -33,14 +33,14 @@ TUNNEL_SSH_HOST=mydomain.tld
 ```
 
 ### the machine to machine ssh key
-- Create a machine to machine ssh key with option `-N ""` and place em into the docker user's `.ssh` folder: `/home/username/.ssh/thetunnel`  
+- Create a machine to machine ssh key with option `-N ""` and place em into the docker user's `.ssh` folder: `/home/my_local_username/.ssh/thetunnel`  
 ```bash
 ssh-keygen -t ed25519 -C "my_remote_username" -f /home/my_local_username/.ssh/thetunnel -N ""
 ```
-> Replace `my_local_username` with the user, who runs docker on the remote machine  
-> Replace `my_remote_username` with the user, who runs docker on the local machine  
+> Replace `my_local_username` with the user, who runs docker on the local machine  
+> Replace `my_remote_username` with the user, who runs docker on the remote machine  
 
-- Place the content of the public key `/home/myusername/.ssh/thetunnel.pub` on the remote machine into the `/home/myusername/.ssh/authorized-keys` file.
+- Place the content of the public key `/home/my_local_username/.ssh/thetunnel.pub` on the remote machine into the `/home/my_remote_username/.ssh/authorized-keys` file.
 ### remote machine `.env` file
 
 ````dotenv
